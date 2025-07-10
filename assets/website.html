@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sleek Website</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define CSS variables for colors */
+        :root {
+            --bg-color: #f0f2f5; /* Light gray */
+            --text-color: #333333; /* Dark gray */
+            --card-bg: #ffffff; /* White */
+            --header-bg-from: #222e50; /* Navy Blue - from */
+            --header-bg-to: #2a3c61; /* Darker Navy Blue - to */
+            --accent-blue: #1a294f; /* Deep Navy Blue for general accents */
+            --accent-blue-hover: #152040; /* Slightly darker Navy Blue for hover */
+            --border-color: #e5e7eb; /* Light gray border */
+            --photo-bg: #e2e8f0; /* Light blue-gray for photo backgrounds */
+            --link-color: #3b82f6; /* Tailwind blue-500 for links */
+            --link-hover-color: #2563eb; /* Tailwind blue-600 for link hover */
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-lg-color: rgba(0, 0, 0, 0.2);
+
+            /* Sidebar specific colors for light mode */
+            --sidebar-bg: #222e50; /* Navy blue background for light mode sidebar */
+            --sidebar-text: #ffffff; /* White text for light mode sidebar */
+            --sidebar-border-color: #000000; /* Black border for sidebar */
+            --sidebar-item-border-color-light: #ffffff; /* White border for menu items in light mode */
+
+            /* Course page specific colors (lighter blue) */
+            --course-header-bg: #4a7d96; /* Medium blue */
+            --course-row-bg-odd: #6c9cb2; /* Lighter blue for odd rows */
+            --course-row-bg-even: #5b8a9f; /* Slightly darker lighter blue for even rows */
+            --course-text-color: #ffffff; /* White text for course table */
+            --course-border-color: #3c6e80; /* Darker blue for table borders */
+
+            /* Homepage banner colors */
+            --banner-bg-from: #d4d4d4; /* Light gray */
+            --banner-bg-to: #b0b0b0; /* Slightly darker light gray */
+            --banner-text-color: #333333; /* Dark text for light banner */
+
+            /* Toggle switch colors */
+            --toggle-bg-light: #cbd5e1; /* Light gray for toggle track (light mode) */
+            --toggle-thumb-light: #334155; /* Dark gray for toggle thumb (light mode) */
+            --toggle-bg-dark: #64748b; /* Darker gray for toggle track (dark mode) */
+            --toggle-thumb-dark: #f1f5f9; /* Light white for toggle thumb (dark mode) */
+
+            /* Header Title Border */
+            --header-title-border-color-light: #ffffff; /* White border for header title in light mode */
+        }
+
+        .dark {
+            --bg-color: #1a202c; /* Dark charcoal */
+            --text-color: #e2e8f0; /* Light gray */
+            --card-bg: #2d3748; /* Darker gray for cards */
+            --header-bg-from: #1a202c; /* Even darker Navy Blue for header in dark mode */
+            --header-bg-to: #2d3748; /* Dark gray */
+            --accent-blue: #4a69bd; /* Slightly lighter navy for dark mode accent */
+            --accent-blue-hover: #3b5090;
+            --border-color: #4a5568; /* Darker border */
+            --photo-bg: #4a5568; /* Darker gray for photo backgrounds */
+            --link-color: #60a5fa; /* Tailwind blue-400 for links in dark mode */
+            --link-hover-color: #3b82f6; /* Tailwind blue-500 for link hover in dark mode */
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --shadow-lg-color: rgba(0, 0, 0, 0.6);
+
+            /* Sidebar specific colors for dark mode */
+            --sidebar-bg: #ffffff; /* White background for dark mode sidebar */
+            --sidebar-text: #222e50; /* Navy blue text for dark mode sidebar */
+            --sidebar-border-color: #000000; /* Black border for sidebar */
+            --sidebar-item-border-color-dark: #222e50; /* Navy blue border for menu items in dark mode */
+
+            /* Course page specific colors for dark mode (darker blues for contrast) */
+            --course-header-bg: #2a4c5e; /* Darker blue */
+            --course-row-bg-odd: #3b6175; /* Darker lighter blue for odd rows */
+            --course-row-bg-even: #325568; /* Darker slightly darker blue for even rows */
+            --course-text-color: #e2e8f0; /* Light gray text for course table in dark mode */
+            --course-border-color: #1a3c4a; /* Even darker blue for table borders in dark mode */
+
+            /* Homepage banner colors for dark mode */
+            --banner-bg-from: #4a5568; /* Darker gray for dark mode banner */
+            --banner-bg-to: #3a414e; /* Even darker gray */
+            --banner-text-color: #e2e8f0; /* Light text for dark banner */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Apply custom variable colors using Tailwind's arbitrary values */
+        .bg-gradient-header {
+            background-image: linear-gradient(to right, var(--header-bg-from), var(--header-bg-to));
+        }
+
+        /* Homepage banner gradient */
+        .bg-gradient-banner {
+            background-image: linear-gradient(to right, var(--banner-bg-from), var(--banner-bg-to));
+            color: var(--banner-text-color); /* Apply banner text color */
+        }
+
+        .text-accent-blue {
+            color: var(--accent-blue);
+        }
+        .hover\:text-accent-blue-hover:hover {
+            color: var(--accent-blue-hover);
+        }
+
+        .bg-accent-blue {
+            background-color: var(--accent-blue);
+        }
+        .hover\:bg-accent-blue-hover:hover {
+            background-color: var(--accent-blue-hover);
+        }
+
+        .bg-card-bg {
+            background-color: var(--card-bg);
+        }
+
+        .shadow-md {
+            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
+        }
+
+        .shadow-xl {
+            box-shadow: 0 20px 25px -5px var(--shadow-lg-color), 0 8px 10px -6px var(--shadow-lg-color);
+        }
+
+        .border-color {
+            border-color: var(--border-color);
+        }
+
+        /* Specific overrides for elements to use variables */
+        .sidebar {
+            background-color: var(--sidebar-bg); /* Controlled by theme variables */
+            color: var(--sidebar-text); /* Default color for sidebar content */
+            border: 4px solid var(--sidebar-border-color); /* Thicker Black border */
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease, color 0.3s ease;
+            transform: translateX(-100%);
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        /* Sidebar links styling for outlines and text color */
+        .sidebar nav a {
+            border: 1px solid var(--sidebar-item-border-color-light); /* Default white border for light mode */
+            margin-bottom: 0.5rem; /* Space between boxed items */
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+            transform: translateY(0);
+        }
+        .dark .sidebar nav a {
+            border: 1px solid var(--sidebar-item-border-color-dark); /* Navy blue border for dark mode */
+        }
+        .sidebar nav a:hover {
+            background-color: var(--header-bg-to); /* Sidebar link hover remains based on header gradient */
+            color: white !important; /* Ensure hover text is white for contrast */
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Close button in sidebar */
+        #closeMenu {
+            color: var(--sidebar-text); /* Matches sidebar text color */
+        }
+
+        .menu-button {
+            transition: transform 0.3s ease-in-out;
+        }
+        .menu-button.open {
+            transform: rotate(90deg);
+        }
+
+        .content-section {
+            display: none; /* Hide all sections by default */
+        }
+        .content-section.active {
+            display: block; /* Show active section */
+        }
+
+        /* Adjust placeholder photo background */
+        .photo-placeholder-bg {
+            background-color: var(--photo-bg);
+        }
+
+        /* Adjust alert modal styling */
+        #customAlertModal .bg-white {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        /* Links and buttons from original Tailwind classes adjusted */
+        a {
+            color: var(--link-color);
+        }
+        a:hover {
+            color: var(--link-hover-color);
+        }
+
+        /* Specific styles for the "My Courses" page table */
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .course-table th, .course-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--course-border-color);
+            color: var(--course-text-color);
+        }
+        .course-table thead th {
+            background-color: var(--course-header-bg);
+            font-weight: bold;
+        }
+        .course-table tbody tr:nth-child(odd) {
+            background-color: var(--course-row-bg-odd);
+        }
+        .course-table tbody tr:nth-child(even) {
+            background-color: var(--course-row-bg-even);
+        }
+        .course-table .icon {
+            font-size: 1.5rem;
+            display: block;
+            text-align: center;
+        }
+        .course-table .icon-check {
+            color: #28a745; /* Green checkmark */
+        }
+        .course-table .icon-x {
+            color: #dc3545; /* Red X-mark */
+        }
+
+        /* Styles for the flip toggle switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 0.5rem 0; /* Add margin for spacing */
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-bg-light); /* Light mode track */
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--toggle-thumb-light); /* Light mode thumb */
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--toggle-bg-dark); /* Dark mode track */
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--accent-blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            background-color: var(--toggle-thumb-dark); /* Dark mode thumb */
+        }
+
+        /* Round sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Sidebar / Off-canvas Menu -->
+    <div id="sidebar" class="sidebar fixed inset-y:0 left-0 w-64 p-4 shadow-lg z-50 overflow-y-auto">
+        <div class="flex justify-end mb-4">
+            <button id="closeMenu" class="text-2xl p-2 rounded-full hover:bg-opacity-20 hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                &times; <!-- Close icon -->
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li class="mb-2">
+                    <a href="#" data-page="home" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">Home</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" data-page="why-made-this" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">Why I Made This</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" data-page="my-courses" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">My Courses</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" data-page="my-portfolio" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">My Portfolio</a>
+                </li>
+                <!-- Removed Project Overview link -->
+                <li class="mb-2">
+                    <a href="#" data-page="individual-project" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">Project Deep Dive</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" data-page="unit-showcase" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">Unit Description</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" data-page="professional-development" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">Professional Development</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" data-page="contact-us" class="block py-2 px-4 rounded-md text-lg hover:text-white transition duration-200">Contact</a>
+                </li>
+                <!-- Theme Toggle Switch in Sidebar -->
+                <li class="mb-2 flex items-center justify-between py-2 px-4 rounded-md text-lg">
+                    <span>Dark Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main content area -->
+    <div class="flex-1 flex flex-col">
+        <!-- Header / Navigation Bar -->
+        <header class="bg-gradient-header text-white p-4 shadow-md flex items-center justify-between z-40">
+            <button id="menuButton" class="bg-accent-blue text-white text-2xl p-3 rounded-md hover:bg-accent-blue-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white menu-button">
+                &#9776; <!-- Hamburger icon -->
+            </button>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Nehemia's Website</h1>
+            <!-- Removed theme toggle from header -->
+        </header>
+
+        <!-- Page Content Container -->
+        <main id="content" class="flex-1 p-4 md:p-8 overflow-y-auto">
+
+            <!-- Homepage Section -->
+            <section id="home" class="content-section active bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <!-- Banner Title -->
+                <div class="bg-gradient-banner rounded-md p-4 text-center mb-6 shadow-md">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-2 leading-tight">Welcome to my website!</h2>
+                    <p class="text-xl md:text-2xl font-light">you should hire me 😋👌</p>
+                </div>
+
+                <!-- Information about the website -->
+                <div class="text-center mb-8">
+                    <p class="text-lg leading-relaxed max-w-3xl mx-auto">
+                        This website was created to show off my intensive skills when it come to IT. This was made as a way for my employer can see what i can do and why they should hire me.
+                    </p>
+                </div>
+
+                <!-- Single, Enlarged Image Section (formerly Interactive Images) -->
+                <div class="flex justify-center items-center mb-8">
+                    <!-- Photo 1: Company Logo (download.png) - Enlarged and Centered -->
+                    <div class="photo-placeholder-bg rounded-lg p-6 shadow-md w-full max-w-xl transition duration-300 transform hover:-translate-y-1 cursor-pointer">
+                      <img src="logo.png" alt="Description" style="width: 550px; height: 300px;">
+                        <h3 class="text-xl font-semibold text-center mt-3"></h3>
+                    </div>
+                </div>
+
+                <!-- Link Buttons to other pages (simulated) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <button data-page="why-made-this" class="page-link-button bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Why I Made This
+                    </button>
+                    <button data-page="my-courses" class="page-link-button bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        My Courses
+                    </button>
+                    <button data-page="my-portfolio" class="page-link-button bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        My Portfolio
+                    </button>
+                    <button data-page="contact-us" class="page-link-button bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Get In Touch
+                    </button>
+                </div>
+            </section>
+
+            <!-- Page: Why I Made This (formerly About Us) -->
+            <section id="why-made-this" class="content-section bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-center">Why I Made This Website</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <!-- Picture Box -->
+                    <div class="photo-placeholder-bg rounded-lg p-4 shadow-md flex items-center justify-center h-full">
+                        <img src="unnamed.png" alt="just an image">
+                    </div>
+                    <!-- Talking about why I made this -->
+                    <div>
+                        <p class="leading-relaxed mb-4">
+                            This website serves as a tangible demonstration of my capabilities in Information Technology. It's designed not just as a portfolio, but as a living example of how I approach problem-solving, design, and implementation in a professional context.
+                        </p>
+                        <p class="leading-relaxed mb-4">
+                            My primary goal in creating this site was to provide potential employers with a clear, interactive overview of my skills. From responsive design principles to front-end development, and even the integration of user-friendly features like the dark/light mode toggle, every aspect of this project highlights my dedication to creating robust and intuitive digital experiences.
+                        </p>
+                        <p class="leading-relaxed">
+                            It represents my passion for IT and my commitment to continuous learning and application of best practices. I believe this website effectively showcases my ability to deliver high-quality work and my readiness to contribute meaningfully to a professional team.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page: My Courses (formerly Services) -->
+            <section id="my-courses" class="content-section bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-center">My Courses</h2>
+                <div class="overflow-x-auto rounded-lg shadow-md">
+                    <table class="course-table">
+                        <thead>
+                            <tr>
+                                <th class="rounded-tl-lg">Courses</th>
+                                <th>Am I confident in this course?</th>
+                                <th>Did I pass this course successfully?</th>
+                                <th class="rounded-tr-lg">Key details about the course</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Level 2 Spreadsheets</td>
+                                <td><span class="icon icon-check">&#10003;</span></td>
+                                <td><span class="icon icon-check">&#10003;</span></td>
+                                <td>
+                                    Mastered essential spreadsheet functions for data organization.
+                                    Developed skills in basic data analysis and visualization.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Level 2 Software</td>
+                                <td><span class="icon icon-x">&times;</span></td>
+                                <td><span class="icon icon-check">&#10003;</span></td>
+                                <td>
+                                    Explored fundamental software concepts and application usage.
+                                    Gained proficiency in various productivity software tools.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Technology Systems</td>
+                                <td><span class="icon icon-x">&times;</td>
+                                <td><span class="icon icon-check">&#10003;</span></td>
+                                <td>
+                                    Understood core components and architecture of technology systems.
+                                    Learned about system integration and troubleshooting.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Online World</td>
+                                <td><span class="icon icon-x">&times;</td>
+                                <td><span class="icon icon-check">&#10003;</span></td>
+                                <td>
+                                    Navigated the complexities of the internet and online safety.
+                                    Studied digital communication and online presence.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Page: My Portfolio (formerly Page 3) -->
+            <section id="my-portfolio" class="content-section bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-center">My Portfolio</h2>
+                <div class="bg-card-bg rounded-lg p-6 md:p-10 mb-8 shadow-md border-color">
+                    <p class="leading-relaxed text-lg text-center mb-6 max-w-3xl mx-auto">
+                        Here below, i will show some examples of work i have done withing my level 2 IT course that has happened over the year
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="photo-placeholder-bg rounded-lg p-4 shadow-md flex items-center justify-center">
+                            <img src="screenshot 1.png" alt="Description" style="width: 800px; height: 500px;">
+                        </div>
+                        <div class="photo-placeholder-bg rounded-lg p-4 shadow-md flex items-center justify-center">
+                           <img src="screenshot2.png" alt="Description" style="width: 800px; height: 500px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Removed Project Overview section entirely -->
+
+            <section id="individual-project" class="content-section bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-center">Project Deep Dive</h2>
+                <!-- Container for dynamic image and text -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+                    <div class="photo-placeholder-bg rounded-lg p-4 shadow-md flex items-center justify-center min-h-[200px]">
+                        <img id="projectImage" src="" alt="Project Image" class="w-full h-auto rounded-md object-contain max-h-[300px]" onerror="this.style.display='none';">
+                        <p id="imagePlaceholderText" class="text-gray-500 dark:text-gray-400">Click a button to see project details</p>
+                    </div>
+                    <div class="border border-gray-300 p-4 rounded-md shadow-sm flex-grow bg-photo-bg min-h-[200px]">
+                        <p id="projectDescription" class="leading-relaxed text-lg"></p>
+                        <p id="descriptionPlaceholderText" class="text-gray-500 dark:text-gray-400">Description will appear here.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <button id="btnSpreadsheets" class="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Spreadsheets
+                    </button>
+                    <button id="btnOnlineWorld" class="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Online World
+                    </button>
+                    <button id="btnSoftware" class="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Software
+                    </button>
+                </div>
+            </section>
+
+            <section id="unit-showcase" class="content-section bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-center">Unit Description</h2>
+                <!-- Container for dynamic text for Unit Showcase (image removed) -->
+                <div class="flex justify-center mt-6">
+                    <div class="border border-gray-300 p-4 rounded-md shadow-sm flex-grow bg-photo-bg min-h-[200px] w-full max-w-3xl">
+                        <p id="unitDescription" class="leading-relaxed text-lg"></p>
+                        <p id="unitDescriptionPlaceholderText" class="text-gray-500 dark:text-gray-400 text-center">Description will appear here.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <button id="btnUnitSpreadsheets" class="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Spreadsheets
+                    </button>
+                    <button id="btnUnitOnlineWorld" class="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Online World
+                    </button>
+                    <button id="btnUnitSoftware" class="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                        Software
+                    </button>
+                </div>
+            </section>
+
+            <section id="professional-development" class="content-section bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-center">Professional Development</h2>
+                <p class="leading-relaxed mb-4">
+                    My professional development has been significantly shaped by the skills acquired through Online World, Spreadsheets, and Software. The Online World unit honed my digital literacy and secure online collaboration, essential for modern remote work environments. Mastering Spreadsheets provided me with robust data analysis and organizational capabilities, crucial for informed decision-making and efficient project management. Furthermore, the Software unit deepened my understanding of various applications and system interactions, empowering me to troubleshoot effectively and adapt quickly to new technologies. Together, these competencies form a strong foundation for continuous learning and contribute directly to my effectiveness in any professional IT setting.
+                </p>
+            </section>
+
+            <!-- Page: Contact Us (formerly Page 4) -->
+            <section id="contact-us" class="content-section bg-card-bg rounded-lg shadow-xl p-6 md:p-10 mb-8">
+                <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+                <p class="leading-relaxed mb-6">
+                    We'd love to hear from you! Whether you have a question, a project idea, or just want to say hello, feel free to reach out using the information below.
+                </p>
+                <div class="max-w-md mx-auto p-6 rounded-lg shadow-md border-color" style="background-color: var(--photo-bg);">
+                    <h3 class="text-xl font-semibold mb-4">Get in Touch</h3>
+                    <p class="mb-2">
+                        <strong>Email:</strong> <a href="mailto:11180049@collage.wlc.ac.uk" class="hover:underline">11180049@collage.wlc.ac.uk</a>
+                    </p>
+                    <p>
+                        <strong>Address:</strong> <a href="https://maps.app.goo.gl/YourGoogleMapsLinkHere" target="_blank" class="hover:underline">Gliddon Road Barons Court London W14 9BL</a>
+                    </p>
+                </div>
+                <div class="mt-8 text-center text-sm">
+                    <p>We aim to respond to all inquiries within 24-48 hours.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gradient-header text-white p-4 text-center shadow-inner mt-auto">
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-6">
+                <a href="https://twitter.com/example" target="_blank" class="hover:underline">Twitter</a>
+                <a href="https://linkedin.com/in/example" target="_blank" class="hover:underline">LinkedIn</a>
+                <a href="https://github.com/example" target="_blank" class="hover:underline">GitHub</a>
+                <a href="mailto:11180049@collage.wlc.ac.uk" class="hover:underline">11180049@collage.wlc.ac.uk</a>
+            </div>
+            <p class="mt-4 text-sm">&copy; 2025 My Sleek Website. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Custom Modal for Alerts (replacing alert()) -->
+    <div id="customAlertModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-card-bg rounded-lg p-6 shadow-xl max-w-sm w-full mx-auto">
+            <h3 id="alertTitle" class="text-xl font-bold mb-4">Alert</h3>
+            <p id="alertMessageContent" class="mb-6"></p>
+            <div class="flex justify-end">
+                <button id="closeAlert" class="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Function to display custom alert modal instead of alert()
+        function alertMessage(message, title = 'Notification') {
+            const modal = document.getElementById('customAlertModal');
+            document.getElementById('alertTitle').textContent = title;
+            document.getElementById('alertMessageContent').textContent = message;
+            modal.classList.remove('hidden');
+        } 
+        
+        document.getElementById('closeAlert').addEventListener('click', function() {
+            document.getElementById('customAlertModal').classList.add('hidden');
+        });
+
+        // Get references to elements
+        const menuButton = document.getElementById('menuButton');
+        const closeMenuButton = document.getElementById('closeMenu');
+        const sidebar = document.getElementById('sidebar');
+        const contentSections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('#sidebar nav a');
+        const pageLinkButtons = document.querySelectorAll('.page-link-button');
+        const themeToggle = document.getElementById('themeToggle'); // Checkbox for theme toggle
+
+        // Function to show a specific page and hide others
+        function showPage(pageId) {
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Event listener for the menu button (hamburger icon)
+        menuButton.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            // No rotation for hamburger icon in this setup
+        });
+
+        // Event listener for the close menu button
+        closeMenuButton.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            // No rotation reset for hamburger icon in this setup
+        });
+
+        // Add click listeners to navigation links in the sidebar
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default link behavior
+                const pageId = link.getAttribute('data-page');
+                showPage(pageId);
+                // The theme toggle is handled separately, no need to close sidebar if it's the only change.
+                if (link.id !== 'themeToggleLink') { // Only close if it's a page navigation link
+                    sidebar.classList.remove('open'); // Close sidebar after selection
+                }
+            });
+        });
+
+        // Add click listeners to page link buttons on the homepage
+        pageLinkButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const pageId = button.getAttribute('data-page');
+                showPage(pageId);
+                // Optionally scroll to top or highlight menu item if applicable
+            });
+        });
+
+        // Theme Toggle Logic
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark');
+                themeToggle.checked = true; // Set checkbox to checked for dark mode
+            } else {
+                document.body.classList.remove('dark');
+                themeToggle.checked = false; // Set checkbox to unchecked for light mode
+            }
+        }
+
+        // Event listener for theme toggle switch
+        themeToggle.addEventListener('change', () => {
+            const currentTheme = themeToggle.checked ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme); // Store preference
+            applyTheme(currentTheme);
+        });
+
+        // Initial page load: check stored theme and show homepage
+        window.addEventListener('load', () => {
+            const storedTheme = localStorage.getItem('theme') || 'light'; // Default to light
+            applyTheme(storedTheme);
+            showPage('home'); // Ensure homepage is shown on load
+        });
+
+        // Project Deep Dive specific logic
+        const projectData = {
+            "spreadsheets": {
+                image: "Assets/excel logo.png",
+                description: "This project focused on mastering advanced spreadsheet functions for data organization, analysis, and visualization. I learned to create complex formulas, pivot tables, and interactive charts to derive insights from raw data, enhancing my data management skills."
+            },
+            "online-world": {
+                image: "Assets/online world.png",
+                description: "In this project, I explored the intricacies of the online world, focusing on digital communication, online presence, and internet safety. I gained a deeper understanding of web technologies and best practices for secure and effective online interaction."
+            },
+            "software": {
+                image: "Assets/software.png",
+                description: "This project involved hands-on experience with various software applications, enhancing my proficiency in their usage and understanding their underlying concepts. I delved into different software types, their functionalities, and their application in real-world scenarios."
+            }
+        };
+
+        const projectImage = document.getElementById('projectImage');
+        const projectDescription = document.getElementById('projectDescription');
+        const imagePlaceholderText = document.getElementById('imagePlaceholderText');
+        const descriptionPlaceholderText = document.getElementById('descriptionPlaceholderText');
+
+        document.getElementById('btnSpreadsheets').addEventListener('click', () => {
+            updateProjectDeepDive('spreadsheets');
+        });
+        document.getElementById('btnOnlineWorld').addEventListener('click', () => {
+            updateProjectDeepDive('online-world');
+        });
+        document.getElementById('btnSoftware').addEventListener('click', () => {
+            updateProjectDeepDive('software');
+        });
+
+        function updateProjectDeepDive(projectId) {
+            const data = projectData[projectId];
+            if (data) {
+                projectImage.src = data.image;
+                projectImage.style.display = 'block'; // Ensure image is visible
+                imagePlaceholderText.style.display = 'none'; // Hide image placeholder
+
+                projectDescription.textContent = data.description;
+                descriptionPlaceholderText.style.display = 'none'; // Hide text placeholder
+            } else {
+                // Reset if no data found
+                projectImage.src = '';
+                projectImage.style.display = 'none';
+                imagePlaceholderText.style.display = 'block';
+
+                projectDescription.textContent = '';
+                descriptionPlaceholderText.style.display = 'block';
+            }
+        }
+
+        // Unit Showcase specific logic (image removed)
+        const unitData = {
+            "spreadsheets": {
+                description: "This unit provided a comprehensive deep dive into the practical application of spreadsheets for diverse data management tasks. We covered advanced formula construction, data validation techniques, and the strategic use of functions like VLOOKUP and INDEX/MATCH for complex data retrieval. Furthermore, the unit emphasized creating dynamic charts and interactive dashboards, transforming raw data into actionable insights for decision-making. Through hands-on exercises, I developed a robust understanding of spreadsheet automation and its critical role in business intelligence. This subject is crucial for anyone looking to optimize data handling and reporting processes in any professional field, offering powerful tools for efficiency and accuracy. The detailed modules ensured a thorough grasp of both fundamental and advanced concepts, preparing me to tackle real-world data challenges with confidence."
+            },
+            "online-world": {
+                description: "The 'Online World' unit explored the vast landscape of the internet, focusing on its structure, digital communication, and responsible online behavior. We delved into the principles of web technologies, including how websites function, the role of browsers, and basic networking concepts. A significant portion was dedicated to understanding cybersecurity threats, safe online practices, and the importance of data privacy. We also examined various forms of online communication, from email to social media, and their impact on personal and professional interactions. This unit was instrumental in developing a critical awareness of digital citizenship, emphasizing the ethical considerations and legal frameworks that govern online activities. It provided a foundational understanding necessary for navigating the internet securely and effectively, preparing me for a digitally-driven environment."
+            },
+            "software": {
+                description: "This unit on 'Software' provided an in-depth understanding of different software types, their development lifecycles, and their practical applications. We explored operating systems, application software, and utility programs, examining how they interact to facilitate computing tasks. The curriculum included hands-on experience with various productivity suites, demonstrating how to leverage their advanced features for document creation, presentations, and project management. Emphasis was placed on troubleshooting common software issues, understanding licensing models, and the impact of software on user experience and system performance. This unit equipped me with the knowledge to select, install, configure, and maintain software effectively, crucial skills for IT professionals and end-users alike. It also fostered an appreciation for software design principles and their role in solving real-world problems."
+            }
+        };
+
+        const unitDescription = document.getElementById('unitDescription');
+        const unitDescriptionPlaceholderText = document.getElementById('unitDescriptionPlaceholderText');
+
+        // Removed unitImage and unitImagePlaceholderText as they are no longer needed
+
+        document.getElementById('btnUnitSpreadsheets').addEventListener('click', () => {
+            updateUnitShowcase('spreadsheets');
+        });
+        document.getElementById('btnUnitOnlineWorld').addEventListener('click', () => {
+            updateUnitShowcase('online-world');
+        });
+        document.getElementById('btnUnitSoftware').addEventListener('click', () => {
+            updateUnitShowcase('software');
+        });
+
+        function updateUnitShowcase(unitId) {
+            const data = unitData[unitId];
+            if (data) {
+                unitDescription.textContent = data.description;
+                unitDescriptionPlaceholderText.style.display = 'none'; // Hide text placeholder
+            } else {
+                // Reset if no data found
+                unitDescription.textContent = '';
+                unitDescriptionPlaceholderText.style.display = 'block';
+            }
+        }
+        // Initialize Unit Showcase with empty state on page load
+        window.addEventListener('load', () => {
+            updateProjectDeepDive(null); // Call with null or an invalid ID to show placeholders
+            updateUnitShowcase(null); // Initialize Unit Showcase
+            // Existing page load logic for theme and active page
+            const storedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(storedTheme);
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
